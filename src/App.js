@@ -1,6 +1,6 @@
 import Navbar from './Navbar';
 import Home from './Home';
-
+import Stores from './Stores'
 function App() {
  
   return (
@@ -9,6 +9,10 @@ function App() {
      
       <div className='content'>
         <Home />
+      </div>
+
+      <div className="stores">
+        <Stores />
       </div>
    </div>
   );

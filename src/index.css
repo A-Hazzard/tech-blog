@@ -51,3 +51,8 @@
   margin-bottom: 8px;
 }
 /*End blog previews / Lists */
+
+/*Stores styling */
+.stores-preview h1{text-align: center;}
+#different-stores h1{margin-left: 5%; text-align: unset;}
+/*End of stores styling */
