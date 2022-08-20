@@ -1,11 +1,12 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 const Create = () => {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [author, setAuthor] = useState('Aaron');
     const [isLoading, setIsLoading] = useState(false);
     const [h2, seth2] = useState('Add a New Blog');
-
+    const history = useHistory();
     const handleSubmit = e =>{
         //prevent web app from reloading
         e.preventDefault();
@@ -29,6 +30,13 @@ const Create = () => {
             setTimeout(() => {
                 seth2('Add a New Blog')
            }, 5000);
+
+
+           setTimeout(() => {
+            //history.go(-1) redirects the user back 1 or more pages
+            history.push('/');//redirects the user to the home page
+            console.log('Sent user back to home page');
+        }, 5500);
             console.log(`Created ${blog.title} Blog`)
 
         });
@@ -48,7 +56,7 @@ const Create = () => {
                 type="text" 
                 value={title}
                 onChange={(e) => {
-                    console.log("Recording Input data")
+                    console.log("Recording Blog Title Input data")
                     setTitle(e.target.value);    
                 }}
                 required/>
