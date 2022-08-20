@@ -114,3 +114,8 @@
 .description span{
   font-weight: bold;
 }
+
+.btn-disabled{
+  opacity: 50%;
+  
+}

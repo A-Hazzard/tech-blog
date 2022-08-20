@@ -3,13 +3,46 @@ const Create = () => {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [author, setAuthor] = useState('Aaron');
+    const [isLoading, setIsLoading] = useState(false);
+    const [h2, seth2] = useState('Add a New Blog');
+
+    const handleSubmit = e =>{
+        //prevent web app from reloading
+        e.preventDefault();
+
+        const blog = { title, body, author};
+
+        setIsLoading(true)
+      
+
+        fetch('http://localhost:8000/blogs', {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(blog)
+        })
+        .then(() =>{ 
+            setTimeout(() => {
+                setIsLoading(false); 
+                seth2('Blog Posted!')
+            }, 1000);
+           
+            setTimeout(() => {
+                seth2('Add a New Blog')
+           }, 5000);
+            console.log(`Created ${blog.title} Blog`)
+
+        });
+
+        
+
+    }
 
     return (  
         <div className="create">
-            <h2>Add a New Blog</h2>
+            <h2>{h2}</h2>
 
 
-            <form action="">
+            <form onSubmit={handleSubmit}>
             <label>Blog Title: </label>
             <input
                 type="text" 
@@ -38,11 +71,14 @@ const Create = () => {
                 <option value="Aaron">Aaron</option>
                 <option value="Hazzard">Hazzard</option> 
             </select>
-            <button>Add Blog</button>
+            {!isLoading && <button>Add Blog</button>}
+           {isLoading && <button className="btn-disabled" disabled>Adding Blog...</button>}
+          
+
             </form>
 
-         
-           <p className="description">Title Input: 
+         <div>
+         <p className="description">Title Input: 
            <span>{title}</span></p>
 
            <p className="description">Body Input: 
@@ -50,6 +86,8 @@ const Create = () => {
            
            <p className="description">Author: 
            <span>{author}</span></p>
+         </div>
+        
         </div>
     );
 }
